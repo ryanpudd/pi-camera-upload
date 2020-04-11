@@ -19,15 +19,13 @@ jobs:
         go-version: ^1.13
       id: go
     - run: go version
-    - run: go env
 
     - name: Checkout code
       uses: actions/checkout@v2
 
     - name: Symlink the workspace
       run: |
-        env
-        export GOPATH=$(go env gopath)
+        export GOPATH=$(go env GOPATH)
         export GOPROJSRC=$GOPATH/src/github.com/$GITHUB_REPOSITORY
         echo ::set-env GOPROJSRC=$GOPROJSRC
         mkdir -p $GOPROJSRC
