@@ -13,13 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - uses: actions/checkout@v2
     - name: Set up Go and Checkout code
       uses: actions/setup-go@v2-beta
       with:
         go-version: ^1.13
       id: go
     - run: go version
+
+    - name: Checkout code
+      uses: actions/checkout@v2
 
     - name: Get dependencies
       run: |
