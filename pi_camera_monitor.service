@@ -1,0 +1,13 @@
+[Unit]
+Description=PI Camera Monitor
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/pi_camera_control pi_camera_monitor
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
