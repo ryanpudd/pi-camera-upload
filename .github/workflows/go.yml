@@ -25,11 +25,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       with:
-        path: ../go/src/
 
     - name: Get dependencies
       run: |
-        cd $(go env GOPATH)/src/${GITHUB_REPOSITORY}
         go get -v -t -d ./...
         if [ -f Gopkg.toml ]; then
           curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
@@ -38,9 +36,7 @@ jobs:
         make install
     - name: Build Linux
       run: |
-        cd $(go env GOPATH)/src/${GITHUB_REPOSITORY}
         make build
     - name: Build ARM
       run: |
-        cd $(go env GOPATH)/src/${GITHUB_REPOSITORY}
         make build_arm
