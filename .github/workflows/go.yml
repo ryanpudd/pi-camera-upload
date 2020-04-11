@@ -27,13 +27,13 @@ jobs:
       run: |
         export GOPATH=$(go env GOPATH)
         export GOPROJSRC=$GOPATH/src/github.com/$GITHUB_REPOSITORY
-        echo ::set-env GOPROJSRC=$GOPROJSRC
         mkdir -p $GOPROJSRC
         ln -s $(pwd) $GOPROJSRC
 
     - run: env
     - name: Get dependencies
       run: |
+        export GOPROJSRC=$GOPATH/src/github.com/$GITHUB_REPOSITORY
         cd $GOPROJSRC
         pwd
         go get -v -t -d ./...
