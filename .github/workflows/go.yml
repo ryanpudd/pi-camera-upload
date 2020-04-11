@@ -13,22 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Set up Go 1.13
-      uses: actions/setup-go@v1
-      with:
-        go-version: 1.13
-      id: go
-    - name: Set up the go env
-      run: |
-        export GOPATH=$HOME/go
-        export GOBIN=$(go env GOPATH)/bin
-        export PATH=$PATH:$GOPATH
-        export PATH=$PATH:$GOBIN
-        mkdir -p $GOPATH/pkg
-        mkdir -p $GOBIN
-
-    - name: Check out code into the Go module directory
+    - name: Set up Go and Checkout code
       uses: actions/checkout@v2
+      uses: actions/setup-go@v2-beta
+      with:
+        go-version: ^1.13
+      id: go
+      run: go version
 
     - name: Get dependencies
       run: |
