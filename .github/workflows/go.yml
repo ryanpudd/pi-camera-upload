@@ -26,13 +26,15 @@ jobs:
     - name: Symlink the workspace
       run: |
         pwd
-        GOPATH=$(go env gopath)
-        GOPROJSRC=$GOPATH/src/$GITHUB_REPOSITORY
+        export GOPATH=$(go env gopath)
+        export GOPROJSRC=$GOPATH/src/github.com/$GITHUB_REPOSITORY
+        echo ::set-env GOPROJSRC=$GOPROJSRC
         mkdir -p $GOPROJSRC
         ln -s $(pwd) $GOPROJSRC
 
     - name: Get dependencies
       run: |
+        cd $GOPROJSRC
         go get -v -t -d ./...
         if [ -f Gopkg.toml ]; then
           curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
