@@ -20,6 +20,9 @@ jobs:
       id: go
     - run: go version
 
+    - name: move workspace to go
+      run: export GITHUB_WORKSPACE $GOPATH/src/github.com/
+
     - name: Checkout code
       uses: actions/checkout@v2
 
