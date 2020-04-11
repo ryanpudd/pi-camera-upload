@@ -22,7 +22,7 @@ jobs:
 
     - name: move workspace to go
       run: |
-        export GITHUB_WORKSPACE $(go env GOPATH)/src/github.com/
+        export GITHUB_WORKSPACE=$(go env GOPATH)/src/github.com/
 
     - name: Checkout code
       uses: actions/checkout@v2
