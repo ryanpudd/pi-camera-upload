@@ -20,6 +20,11 @@ jobs:
       id: go
     - name: Set up the go env
       run: |
+        export GOPATH=$HOME/go
+        export GOBIN=$(go env GOPATH)/bin
+        export PATH=$PATH:$GOPATH
+        export PATH=$PATH:$GOBIN
+        mkdir -p $GOPATH/pkg
         mkdir -p $GOBIN
 
     - name: Check out code into the Go module directory
