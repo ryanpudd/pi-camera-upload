@@ -1,5 +1,6 @@
 # Pi Camera Upload
 ![Go](https://github.com/ryanpudd/pi-camera-upload/workflows/Go/badge.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/ryanpudd/pi-camera-upload)](https://goreportcard.com/report/github.com/ryanpudd/pi-camera-upload)
 
 A simple application that uploads photos from the Raspberry Pi Camera/Web Cam to an S3 bucket with notifications on slack, it is designed to be triggered by Motion
 
@@ -160,7 +161,7 @@ AWS_ACCESS_KEY=xxx
 AWS_SECRET_KEY=xxxxx
 ```
 
-Build the [cctv_upload](./cmd/cctv_upload) program that ties the system together.
+Build the program that ties the system together.
 It's called by the `on_picture_save` script when a new image is created. 
 The program uploads the image to S3 and then sends a webhook to Slack with the image url.
 
