@@ -1,13 +1,6 @@
-.PHONY: release install test build_all build build_arm $(PLATFORMS)
-build:
-	GOOS=linux CGO_ENABLED=0 go build -o ./root/usr/local/bin/pi_camera_upload ./cmd/pi_camera_upload
-	GOOS=linux CGO_ENABLED=0 go build -o ./root/usr/local/bin/pi_camera_monitor ./cmd/pi_camera_monitor
-
-build_arm:
-	GOOS=linux GOARCH=arm CGO_ENABLED=0 go build -o ./root/usr/local/bin/pi_camera_upload ./cmd/pi_camera_upload
-	GOOS=linux GOARCH=arm CGO_ENABLED=0 go build -o ./root/usr/local/bin/pi_camera_monitor ./cmd/pi_camera_monitor
-
 PLATFORMS := linux/amd64 linux/arm windows/amd64
+.PHONY: release install test build_all $(PLATFORMS)
+
 OUT_DIR = bin
 
 
