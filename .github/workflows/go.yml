@@ -41,15 +41,14 @@ jobs:
       run: |
         export GOPROJSRC=$(go env GOPATH)/src/github.com/$GITHUB_REPOSITORY
         cd $GOPROJSRC
-        pwd
-        ls cmd/*
         make install
-        go get -v -t -d ./...
-        if [ -f Gopkg.toml ]; then
-          curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-          dep ensure -v
-        fi
     - name: Build Linux
-      run: make build
+      run: |
+        export GOPROJSRC=$(go env GOPATH)/src/github.com/$GITHUB_REPOSITORY
+        cd $GOPROJSRC
+        make build
     - name: Build ARM
-      run: make build_arm
+      run: |
+        export GOPROJSRC=$(go env GOPATH)/src/github.com/$GITHUB_REPOSITORY
+        cd $GOPROJSRC
+        make build_arm
