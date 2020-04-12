@@ -28,7 +28,7 @@ jobs:
         export GOPROJSRC=$(go env GOPATH)/src/github.com/$GITHUB_REPOSITORY
         pwd
         ls
-        mkdir -p $GOPROJSRC
+        mkdir -p $GOPROJSRC/..
         ln -s $(pwd) $GOPROJSRC
 
     - run: env
