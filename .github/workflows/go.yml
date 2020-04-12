@@ -32,6 +32,7 @@ jobs:
         cd $GOPROJSRC/..
         rm -rf *
         ln -s WORKSPACE $GOPROJSRC
+        ls
 
     - run: env
     - name: Get dependencies
