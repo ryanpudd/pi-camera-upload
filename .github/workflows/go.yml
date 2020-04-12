@@ -34,6 +34,7 @@ jobs:
     - run: env
     - name: Get dependencies
       run: |
+        rm -rf $(go env GOPATH)/src
         export GOPROJSRC=$(go env GOPATH)/src/github.com/$GITHUB_REPOSITORY
         cd $GOPROJSRC
         pwd
