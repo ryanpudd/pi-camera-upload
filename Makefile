@@ -1,28 +1,42 @@
-PLATFORMS := linux/amd64 linux/arm windows/amd64
 .PHONY: release install test build_all $(PLATFORMS)
 
-OUT_DIR = bin
+PACKAGE_NAME=pi-camera-upload
+OUT_DIR = ./bin
+DIST_DIR = ./dist
+CMD_DIR = ./cmd
+SCRIPT_DIR = ./scripts
+CONFIG_DIR = ./configs
+PLATFORMS := linux/amd64 linux/arm windows/amd64
 
+BUILDS := $(patsubst %, build_%, $(PLATFORMS))
+INITS := $(patsubst %, init_%, $(PLATFORMS))
+PACKAGES := $(patsubst %, package_%, $(PLATFORMS))
 
 temp = $(subst /, ,$@)
 os = $(word 1, $(temp))
 arch = $(word 2, $(temp))
 
-$(PLATFORMS): init
+$(INITS): init
 	mkdir $(OUT_DIR)/$(os)-$(arch)
-	GOOS=$(os) GOARCH=$(arch) go build -o '$(OUT_DIR)/$(os)-$(arch)' ./cmd/...
+
+$(BUILDS): $(INITS)
+	GOOS=$(os) GOARCH=$(arch) go build -o '$(OUT_DIR)/$(os)-$(arch)' $(CMD_DIR)/...
+
+$(ZIPS)
+	zip -o $(DIST)/$(os)-$(arch).zip $(BIN_DIR)/$(os)-$(arch) $(SCRIPT_DIR) $(CONFIG_DIR)
 
 init:
 	mkdir -p $(OUT_DIR)
+dist:
+	mkdir = $(DIST_DIR)
 clean:
 	rm -rf $(OUT_DIR)
-build_all: $(PLATFORMS)
-release: test build_all
 test:
-	CGO_ENABLED=0 go test ./cmd/...
-zip:
-	zip $(OUT_DIR)
-
+	CGO_ENABLED=0 go test $(CMD_DIR)/...
 install:
 	go get -u github.com/golang/dep/cmd/dep
 	dep ensure -v
+
+zip: $(ZIPS)
+build: $(BUILDS)
+release: test build zip
