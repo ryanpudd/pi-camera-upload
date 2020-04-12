@@ -9,9 +9,12 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
-	"github.com/satori/go.uuid"
+	uuid "github.com/satori/go.uuid"
 )
 
+// UploadToS3 uploads the filepath to the region and bucket provided
+// returns the full URL on success
+// raises errors from the AWS API
 func UploadToS3(region, bucket, filepath string) (string, error) {
 	s, err := session.NewSession(&aws.Config{Region: aws.String(region)})
 	if err != nil {

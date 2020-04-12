@@ -5,6 +5,7 @@ import (
 	"os"
 )
 
+// Environment variables used for configuration
 const (
 	EnvSlackToken         = "SLACK_TOKEN"
 	EnvSlackChannelID     = "SLACK_CHANNEL_ID"

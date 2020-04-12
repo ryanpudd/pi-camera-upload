@@ -14,7 +14,7 @@ func Between(value string, a string, b string) string {
 	}
 	posFirstAdjusted := posFirst + len(a)
 
-	posLast := strings.Index(value[posFirstAdjusted:len(value)], b)
+	posLast := strings.Index(value[posFirstAdjusted:], b)
 	if posLast == -1 {
 		return ""
 	}
@@ -47,5 +47,5 @@ func After(value string, a string) string {
 	if adjustedPos >= len(value) {
 		return ""
 	}
-	return value[adjustedPos:len(value)]
+	return value[adjustedPos:]
 }
