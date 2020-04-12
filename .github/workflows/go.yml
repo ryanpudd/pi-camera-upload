@@ -25,13 +25,13 @@ jobs:
 
     - name: Symlink the workspace
       run: |
-        rm -rf $(go env GOPATH)/src
+        ls
         export WORKSPACE=$(pwd)
         export GOPROJSRC=$(go env GOPATH)/src/github.com/$GITHUB_REPOSITORY
         mkdir -p $GOPROJSRC
         cd $GOPROJSRC/..
         rm -rf *
-        ln -s WORKSPACE $GOPROJSRC
+        ln -s $WORKSPACE $GOPROJSRC
         ls
         pwd
         ls $GOPROJSRC
