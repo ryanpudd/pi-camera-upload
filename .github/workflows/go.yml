@@ -25,30 +25,51 @@ jobs:
 
     - name: Symlink the workspace
       run: |
-        ls
         export WORKSPACE=$(pwd)
         export GOPROJSRC=$(go env GOPATH)/src/github.com/$GITHUB_REPOSITORY
         mkdir -p $GOPROJSRC
         cd $GOPROJSRC/..
         rm -rf *
         ln -s $WORKSPACE $GOPROJSRC
-        ls
-        pwd
-        ls $GOPROJSRC
-
     - run: env
     - name: Get dependencies
       run: |
         export GOPROJSRC=$(go env GOPATH)/src/github.com/$GITHUB_REPOSITORY
         cd $GOPROJSRC
         make install
-    - name: Build Linux
+    - name: Run tests
       run: |
         export GOPROJSRC=$(go env GOPATH)/src/github.com/$GITHUB_REPOSITORY
         cd $GOPROJSRC
-        make build
-    - name: Build ARM
+        make tests
+    - name: Build
       run: |
         export GOPROJSRC=$(go env GOPATH)/src/github.com/$GITHUB_REPOSITORY
         cd $GOPROJSRC
-        make build_arm
+        make build_all
+    - name: Zip artifacts
+      run: |
+        export GOPROJSRC=$(go env GOPATH)/src/github.com/$GITHUB_REPOSITORY
+        cd $GOPROJSRC
+        zip -r $GITHUB_WORKSPACE/release.zip ./bin
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: Release note HERE
+      draft: false
+      prerelease: false
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} 
+        asset_path: ./release.zip
+        asset_name: pi-camera-upload.zip
+        asset_content_type: application/zip
