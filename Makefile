@@ -22,7 +22,7 @@ $(INITS): init
 $(BUILDS): $(INITS)
 	GOOS=$(os) GOARCH=$(arch) go build -o '$(OUT_DIR)/$(os)-$(arch)' $(CMD_DIR)/...
 
-$(ZIPS)
+$(ZIPS):
 	zip -o $(DIST)/$(os)-$(arch).zip $(BIN_DIR)/$(os)-$(arch) $(SCRIPT_DIR) $(CONFIG_DIR)
 
 init:
