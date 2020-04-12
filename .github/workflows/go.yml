@@ -41,7 +41,7 @@ jobs:
       run: |
         export GOPROJSRC=$(go env GOPATH)/src/github.com/$GITHUB_REPOSITORY
         cd $GOPROJSRC
-        make tests
+        make test
     - name: Build
       run: |
         export GOPROJSRC=$(go env GOPATH)/src/github.com/$GITHUB_REPOSITORY
