@@ -9,7 +9,7 @@ CONFIG_DIR = ./configs
 PLATFORMS := linux/amd64 linux/arm windows/amd64
 
 BUILDS := $(patsubst %, build_%, $(PLATFORMS))
-ZIPS := $(patsubst %, build_%, $(PLATFORMS))
+ZIPS := $(patsubst %, zip_%, $(PLATFORMS))
 INITS := $(patsubst %, init_%, $(PLATFORMS))
 PACKAGES := $(patsubst %, package_%, $(PLATFORMS))
 
