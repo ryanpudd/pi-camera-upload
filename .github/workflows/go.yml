@@ -47,3 +47,14 @@ jobs:
         export GOPROJSRC=$(go env GOPATH)/src/github.com/$GITHUB_REPOSITORY
         cd $GOPROJSRC
         make build_all
+    - name: Zip
+      run: |
+        export GOPROJSRC=$(go env GOPATH)/src/github.com/$GITHUB_REPOSITORY
+        cd $GOPROJSRC
+        make zip
+    - name: Upload Artifacts
+      id: upload-artifact 
+      uses: actions/upload-artifact@v2
+      with:
+        name: build.zip 
+        path: ./dist/*.zip
