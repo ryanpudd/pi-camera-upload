@@ -46,7 +46,7 @@ jobs:
       run: |
         export GOPROJSRC=$(go env GOPATH)/src/github.com/$GITHUB_REPOSITORY
         cd $GOPROJSRC
-        make build_all
+        make build
     - name: Zip
       run: |
         export GOPROJSRC=$(go env GOPATH)/src/github.com/$GITHUB_REPOSITORY
