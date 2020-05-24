@@ -149,9 +149,9 @@ to AWS S3 and notifying a Slack channel.
 # Uploading images
 
 TODO - Update this guide once deployment mechanism is complete
-Edit the `on_picture_save` script with your AWS and Slack secrets:
+Create the `env.conf` script with your AWS and Slack secrets:
 ```
-# ./root/usr/local/bin/on_picture_save
+# /usr/local/etc/pi_camera_control/env.conf
 
 SLACK_TOKEN=xxxx
 SLACK_CHANNEL_ID=xxxxx
@@ -182,7 +182,30 @@ Finally, open the motion config again and configure it to call the `on_picture_s
 
 ```
 # /etc/motion/motion.conf
-on_picture_save /usr/local/bin/on_picture_save %f
+on_picture_save /usr/local/bin/pi_camera_control pi_camera_upload %f
+```
+
+NOTE: Enable the daemon for the service
+NOTE: Output best picture
+```
+output_pictures best
+```
+
+NOTE: Disable Video
+```
+ffmpeg_output_movies off
+```
+
+NOTE: Increase resolution to 1920 x 1080
+```
+width 1920
+height 1080
+```
+
+NOTE:
+Text needs to be double sized
+```
+text_double on
 ```
 
 Restart motion

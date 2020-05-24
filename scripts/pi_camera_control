@@ -1,0 +1,4 @@
+# Export the vars in .env into your shell:
+export $(egrep -v '^#' /usr/local/etc/pi_camera_monitor/env.conf | xargs)
+
+./usr/local/bin/$1
