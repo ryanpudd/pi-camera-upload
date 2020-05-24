@@ -3,7 +3,8 @@ Description=PI Camera Monitor
 After=network.target
 
 [Service]
-ExecStart=/usr/local/bin/pi_camera_control pi_camera_monitor
+ExecStart=/usr/local/bin/pi_camera_monitor
+EnvironmentFile=/usr/local/etc/pi_camera_monitor/env.conf
 StandardOutput=inherit
 StandardError=inherit
 Restart=always

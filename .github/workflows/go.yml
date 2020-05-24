@@ -56,5 +56,5 @@ jobs:
       id: upload-artifact 
       uses: actions/upload-artifact@v2
       with:
-        name: build.zip 
+        name: builds 
         path: ./dist/*.zip
