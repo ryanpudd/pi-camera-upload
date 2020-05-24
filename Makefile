@@ -24,7 +24,7 @@ $(BUILDS): $(INITS)
 	GOOS=$(os) GOARCH=$(arch) go build -o '$(OUT_DIR)/$(os)-$(arch)' $(CMD_DIR)/...
 
 $(ZIPS): dist
-	zip -o $(DIST)/$(os)-$(arch).zip $(BIN_DIR)/$(os)-$(arch) $(SCRIPT_DIR) $(CONFIG_DIR)
+	zip -o $(DIST_DIR)/$(os)-$(arch).zip $(OUT_DIR)/$(os)-$(arch) $(SCRIPT_DIR) $(CONFIG_DIR)
 
 init:
 	mkdir -p $(OUT_DIR)
