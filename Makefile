@@ -13,7 +13,7 @@ INITS := $(patsubst %, init_%, $(PLATFORMS))
 PACKAGES := $(patsubst %, package_%, $(PLATFORMS))
 
 temp = $(subst /, ,$@)
-os = $(word 1, $(temp))
+os = $(word 1, $(word 2, $(subst _, , $(temp))))
 arch = $(word 2, $(temp))
 
 $(INITS): init
